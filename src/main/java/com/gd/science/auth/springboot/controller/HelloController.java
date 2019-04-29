@@ -45,7 +45,7 @@ public class HelloController {
 	@ResponseBody
 	public TbRole roleSc() {
 		List<TbRole> list = roleService.findAll();
-		System.out.println("svc");
+		System.out.println("svc1111");
 		return list.get(0);
 	}
 
