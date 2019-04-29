@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gd.science.auth.mapper.TbFunctionMapper" >
+  <resultMap id="BaseResultMap" type="com.gd.science.auth.pojo.TbFunction" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="function_code" property="functionCode" jdbcType="VARCHAR" />
+    <result column="function_name" property="functionName" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="function_url" property="functionUrl" jdbcType="VARCHAR" />
+    <result column="generate_menu" property="generateMenu" jdbcType="VARCHAR" />
+    <result column="i_index" property="iIndex" jdbcType="INTEGER" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="creation_time" property="creationTime" jdbcType="TIMESTAMP" />
+    <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, function_code, function_name, description, function_url, generate_menu, i_index, 
+    create_by, creation_time, parent_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gd.science.auth.pojo.TbFunctionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_function
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_function
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_function
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gd.science.auth.pojo.TbFunctionExample" >
+    delete from tb_function
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gd.science.auth.pojo.TbFunction" >
+    insert into tb_function (id, function_code, function_name, 
+      description, function_url, generate_menu, 
+      i_index, create_by, creation_time, 
+      parent_id)
+    values (#{id,jdbcType=BIGINT}, #{functionCode,jdbcType=VARCHAR}, #{functionName,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{functionUrl,jdbcType=VARCHAR}, #{generateMenu,jdbcType=VARCHAR}, 
+      #{iIndex,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR}, #{creationTime,jdbcType=TIMESTAMP}, 
+      #{parentId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gd.science.auth.pojo.TbFunction" >
+    insert into tb_function
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="functionCode != null" >
+        function_code,
+      </if>
+      <if test="functionName != null" >
+        function_name,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="functionUrl != null" >
+        function_url,
+      </if>
+      <if test="generateMenu != null" >
+        generate_menu,
+      </if>
+      <if test="iIndex != null" >
+        i_index,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="creationTime != null" >
+        creation_time,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="functionCode != null" >
+        #{functionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="functionName != null" >
+        #{functionName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="functionUrl != null" >
+        #{functionUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="generateMenu != null" >
+        #{generateMenu,jdbcType=VARCHAR},
+      </if>
+      <if test="iIndex != null" >
+        #{iIndex,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="creationTime != null" >
+        #{creationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gd.science.auth.pojo.TbFunctionExample" resultType="java.lang.Integer" >
+    select count(*) from tb_function
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_function
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.functionCode != null" >
+        function_code = #{record.functionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.functionName != null" >
+        function_name = #{record.functionName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.functionUrl != null" >
+        function_url = #{record.functionUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.generateMenu != null" >
+        generate_menu = #{record.generateMenu,jdbcType=VARCHAR},
+      </if>
+      <if test="record.iIndex != null" >
+        i_index = #{record.iIndex,jdbcType=INTEGER},
+      </if>
+      <if test="record.createBy != null" >
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creationTime != null" >
+        creation_time = #{record.creationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.parentId != null" >
+        parent_id = #{record.parentId,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_function
+    set id = #{record.id,jdbcType=BIGINT},
+      function_code = #{record.functionCode,jdbcType=VARCHAR},
+      function_name = #{record.functionName,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      function_url = #{record.functionUrl,jdbcType=VARCHAR},
+      generate_menu = #{record.generateMenu,jdbcType=VARCHAR},
+      i_index = #{record.iIndex,jdbcType=INTEGER},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      creation_time = #{record.creationTime,jdbcType=TIMESTAMP},
+      parent_id = #{record.parentId,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gd.science.auth.pojo.TbFunction" >
+    update tb_function
+    <set >
+      <if test="functionCode != null" >
+        function_code = #{functionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="functionName != null" >
+        function_name = #{functionName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="functionUrl != null" >
+        function_url = #{functionUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="generateMenu != null" >
+        generate_menu = #{generateMenu,jdbcType=VARCHAR},
+      </if>
+      <if test="iIndex != null" >
+        i_index = #{iIndex,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="creationTime != null" >
+        creation_time = #{creationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gd.science.auth.pojo.TbFunction" >
+    update tb_function
+    set function_code = #{functionCode,jdbcType=VARCHAR},
+      function_name = #{functionName,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      function_url = #{functionUrl,jdbcType=VARCHAR},
+      generate_menu = #{generateMenu,jdbcType=VARCHAR},
+      i_index = #{iIndex,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      creation_time = #{creationTime,jdbcType=TIMESTAMP},
+      parent_id = #{parentId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
